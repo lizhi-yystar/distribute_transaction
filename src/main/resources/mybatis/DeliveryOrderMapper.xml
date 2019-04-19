@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tempus.cn.distributetransactiondemo1.mapper.DeliveryOrderMapper">
+    <resultMap id="resultMap" type="com.tempus.cn.distributetransactiondemo1.model.DeliveryOrderModel">
+        <result column="id" javaType="java.lang.Integer" property="id"/>
+        <result column="delivery_id" javaType="java.lang.String" property="deliveryId"/>
+        <result column="order_id" javaType="java.lang.String" property="orderId"/>
+        <result column="address" javaType="java.lang.String" property="address"/>
+        <result column="create_time" javaType="java.util.Date" property="createTime"/>
+    </resultMap>
+
+    <insert id="saveDeliveryOrder" parameterType="com.tempus.cn.distributetransactiondemo1.model.DeliveryOrderModel" keyProperty="id" useGeneratedKeys="true">
+       insert  into delivery_order_table(`delivery_id`,`order_id`,`address`,`create_time`)
+       value
+       (#{deliveryId},#{orderId},#{address},#{createTime})
+    </insert>
+</mapper>
