@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tempus.cn.distributetransactiondemo.mapper.MessageSendMapper">
+    <resultMap id="resultMap" type="com.tempus.cn.distributetransactiondemo.model.MessageSendModel">
+        <result column="id" javaType="java.lang.Integer" property="id"/>
+        <result column="message_content" javaType="java.lang.String" property="orderId"/>
+        <result column="message_status" javaType="java.lang.String" property="messageStatus"/>
+        <result column="error_info" javaType="java.lang.String" property="errorInfo"/>
+        <result column="create_time" javaType="java.util.Date" property="createTime"/>
+    </resultMap>
+
+    <insert id="saveMessageInfo" keyProperty="id" useGeneratedKeys="true" parameterType="com.tempus.cn.distributetransactiondemo.model.MessageSendModel">
+         insert into `tb_message_send`(`message_content`,`message_status`,`error_info`,`create_time`)
+          value(#{orderId},#{messageStatus},#{errorInfo},#{createTime})
+    </insert>
+
+    <update id="updateMessage" parameterType="com.tempus.cn.distributetransactiondemo.model.MessageSendModel">
+        update  `tb_message_send`
+         set `message_content`=#{orderId},
+         `message_status`=#{messageStatus},
+         `error_info`=#{errorInfo}
+         where id=#{id}
+    </update>
+
+    <update id="updateSendStatusByOrderNo">
+         update  `tb_message_send` set `message_status`=1 where `message_content`=#{orderId}
+    </update>
+</mapper>
